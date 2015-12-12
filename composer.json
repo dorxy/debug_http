@@ -1,0 +1,27 @@
+{
+    "name": "dorxy/debug-http-client",
+    "description": "CakePHP Debug Kit Http Client panel",
+    "type": "cakephp-plugin",
+    "keywords": ["cakephp", "debug", "http", "client"],
+    "homepage": "https://github.com/dorxy/debug-http-client",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Simone Alers",
+            "role": "Author"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/dorxy/debug-http-client/issues",
+        "source": "https://github.com/dorxy/debug-http-client"
+    },
+    "require": {
+        "cakephp/cakephp": "3.1.*",
+    },
+    "autoload": {
+        "psr-4": {
+            "DebugClient\\": "src"
+        }
+    },
+    "minimum-stability": "beta"
+}
