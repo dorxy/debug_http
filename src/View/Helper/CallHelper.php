@@ -69,6 +69,9 @@ class CallHelper extends Helper
             $html = '<thead><tr><th colspan="2">' . $name . '</th></tr></thead><tbody>';
         }
         foreach ($headers as $key => $value) {
+            if(is_array($value)){
+                $value = implode("\n\n", $value);
+            }
             $html .= "<tr><td>$key</td><td>$value</td></tr>";
         }
 
@@ -87,6 +90,10 @@ class CallHelper extends Helper
     {
         if (empty($content)) {
             return '<pre data-format-text><span style="color:darkgrey;">Empty body</span></pre>';
+        }
+
+        if(is_array($content)){
+            $content = http_build_query($content);
         }
 
         $contentType = 'text';
@@ -122,7 +129,7 @@ class CallHelper extends Helper
 
 
         $html = $copyButton;
-        if ( ! empty($contentFormatted) && $contentFormatted != $content) {
+        if ( ! empty($contentFormatted)) {
             $html .= $rawButton . '<pre>';
             $html .= $this->Html->tag('code', htmlentities($contentFormatted), ['class' => 'language-' . $contentType]);
             $html .= $this->Html->tag('code', htmlentities($content), ['class' => 'raw', 'style' => 'display:none;']);

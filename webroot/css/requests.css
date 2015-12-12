@@ -51,7 +51,7 @@
 
 /* Methods */
 .method {
-    width: 50px;
+    min-width: 70px;
     color: white;
     font-weight: bold;
     text-align: center;
@@ -83,7 +83,7 @@
     padding: 3px;
     display: inline-block;
     font-weight: bold;
-    width: 50px;
+    min-width: 50px;
     text-align: center;
 }
 
