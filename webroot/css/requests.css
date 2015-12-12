@@ -127,6 +127,15 @@
     padding-right: 10px;
 }
 
+@media (max-width: 800px) {
+    .reqres-container {
+        float: none;
+        width: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
 .reqres-container .debug-table {
     margin-bottom: -1px;
     margin-top: 0;
