@@ -125,10 +125,11 @@ class CallHelper extends Helper
         if ( ! empty($contentFormatted) && $contentFormatted != $content) {
             $html .= $rawButton . '<pre>';
             $html .= $this->Html->tag('code', htmlentities($contentFormatted), ['class' => 'language-' . $contentType]);
+            $html .= $this->Html->tag('code', htmlentities($content), ['class' => 'raw', 'style' => 'display:none;']);
         } else {
             $html .= '<pre>';
+            $html .= $this->Html->tag('code', htmlentities($content), ['class' => 'raw']);
         }
-        $html .= $this->Html->tag('code', htmlentities($content), ['class' => 'raw', 'style' => 'display:none;']);
         $html .= '</pre>';
 
         return $html;
