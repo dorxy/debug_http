@@ -9,7 +9,7 @@ use DebugKit\DebugPanel;
  */
 class ClientCallPanel extends DebugPanel
 {
-    public $plugin = 'DebugHttpClient';
+    public $plugin = 'DebugHttp';
 
     public function summary()
     {
