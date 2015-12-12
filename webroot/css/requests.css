@@ -1,0 +1,179 @@
+/**
+ * Neat Request styles
+ */
+.neat-requests,
+.neat-requests li {
+    list-style: none;
+    list-style-image: none;
+}
+
+.neat-requests {
+    padding: 1px 2px;
+    background: #004d40;
+    list-style: none;
+    margin: 0 0 1em 0;
+}
+
+.neat-requests li {
+    border-top: 1px solid #004d40;
+    border-bottom: 1px solid #004d40;
+    background: rgba(255, 255, 255, 0.95);
+    margin: 0;
+    line-height: 1.5em;
+}
+
+.neat-requests li:after {
+    clear: both;
+    content: '';
+    display: table;
+}
+
+.neat-requests li > div:first-child:hover {
+    background: #fff;
+}
+
+.neat-requests li > div:last-child {
+    border-top: 1px solid #004d40;
+}
+
+/* expandable sections */
+.neat-requests li.expandable {
+    cursor: pointer;
+}
+
+.neat-requests .expanded {
+    border-bottom: 0;
+}
+
+.neat-requests li {
+    cursor: default;
+}
+
+/* Methods */
+.method {
+    width: 50px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    padding: 3px;
+    text-transform: uppercase;
+    background-color: grey;
+    display: inline-block;
+}
+
+.method.method-post {
+    background-color: #10a54a;
+}
+
+.method.method-get {
+    background-color: #0f6ab4;
+}
+
+.method.method-put {
+    background-color: #c5862b;
+}
+
+.method.method-delete {
+    background-color: #a41e22;
+}
+
+/* Response codes */
+.response-code {
+    color: black;
+    padding: 3px;
+    display: inline-block;
+    font-weight: bold;
+    width: 50px;
+    text-align: center;
+}
+
+.response-code.code-200 {
+    color: #00BC52;
+}
+
+.response-code.code-400 {
+    color: #FF8F00;
+}
+
+.response-code.code-500 {
+    color: #E30000;
+}
+
+.response-code.code-300 {
+    color: #0084DF;
+}
+
+/* Time */
+.time {
+    float: right;
+    display: inline-block;
+    font-size: 12px;
+    padding-top: 2px;
+    padding-right: 5px;
+}
+
+.reqres-container {
+    float: left;
+    width: 50%;
+    padding: 5px 5px 10px;
+    box-sizing: border-box;
+}
+
+.reqres-container:first-child {
+    padding-left: 10px;
+}
+
+.reqres-container:last-child {
+    padding-right: 10px;
+}
+
+.reqres-container .debug-table {
+    margin-bottom: -1px;
+    margin-top: 0;
+}
+
+.reqres-container .debug-table td {
+    font-size: 12px;
+    font-family: monospace, monospace;
+    line-height: 14px;
+}
+
+.reqres-container .debug-table th:nth-child(n+2), .reqres-container .debug-table td:nth-child(n+2) {
+    text-align: left;
+}
+
+.reqres-container pre {
+    position: relative;
+    min-height: 16px;
+    background-color: ghostwhite;
+    border: 1px solid silver;
+    padding: 5px;
+    font-family: monospace, monospace;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.reqres-container pre code {
+    background: none;
+    padding: 0;
+    margin: 0;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.reqres-container a[data-clipboard-target], .reqres-container a.formatted {
+    position: relative;
+    font-size: 12px;
+    z-index: 1;
+    background: #ffc600;
+    color: black;
+    display: block;
+    padding: 2px 5px;
+    float: right;
+    text-decoration: none;
+}
+
+.reqres-container a.formatted {
+    background: #009688;
+    color: white;
+}
