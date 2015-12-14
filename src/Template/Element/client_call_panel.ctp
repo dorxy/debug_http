@@ -44,6 +44,11 @@ $this->loadHelper('DebugHttp.Call');
                 hljs.highlightBlock(block);
             });
         });
-        new Clipboard('[data-clipboard-target]');
+
+        new Clipboard('.panel-content .select-response', {
+            target: function(trigger) {
+                return $(trigger).siblings('pre').find('code:visible').get(0);
+            }
+        });
     </script>
 <?php endif; ?>

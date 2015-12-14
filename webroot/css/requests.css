@@ -170,7 +170,7 @@
     word-wrap: break-word;
 }
 
-.reqres-container a[data-clipboard-target], .reqres-container a.formatted {
+.reqres-container a.select-response, .reqres-container a.formatted {
     position: relative;
     font-size: 12px;
     z-index: 1;

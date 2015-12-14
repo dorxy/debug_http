@@ -123,8 +123,7 @@ class CallHelper extends Helper
                 $contentFormatted = $doc->saveHTML();
                 break;
         }
-        $randomId   = uniqid('a');
-        $copyButton = '<a href="javascript:;" data-clipboard-target="#' . $randomId . '">Select</a>';
+        $copyButton = '<a href="javascript:;" class="select-response">Select</a>';
         $rawButton  = '<a href="javascript:;" class="formatted" onclick="$(this).text($(this).text() == \'Raw\' ? \'Formatted\' : \'Raw\').next(\'pre\').find(\'> code\').toggle();">Raw</a>';
 
 
