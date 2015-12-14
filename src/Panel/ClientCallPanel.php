@@ -100,16 +100,16 @@ class ClientCallPanel extends DebugPanel
         //add scripts
         $pos = strrpos($body, '</body>');
         if ($pos !== false) {
-            $script = '<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.5/clipboard.min.js"></script>';
-            $script .= '<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/highlight.min.js"></script>';
+            $script = '<script src="' . Router::url('/debug_http/js/highlight.min.js') . '"></script>';
+            $script .= '<script src="' . Router::url('/debug_http/js/clipboard.min.js') . '"></script>';
             $body = substr($body, 0, $pos) . $script . substr($body, $pos);
         }
 
         //add styles
         $pos = strrpos($body, '</head>');
         if ($pos !== false) {
-            $style = "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . Router::url('/debug_http/css/requests.css') . '">';
-            $style .= '<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/styles/default.min.css">';
+            $style = '<link rel="stylesheet" type="text/css" href="' . Router::url('/debug_http/css/requests.css') . '">';
+            $style .= '<link rel="stylesheet" type="text/css" href="' . Router::url('/debug_http/css/highlight.min.css') . '">';
             $body = substr($body, 0, $pos) . $style . substr($body, $pos);
         }
 
