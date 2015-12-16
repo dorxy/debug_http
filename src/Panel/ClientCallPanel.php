@@ -77,7 +77,9 @@ class ClientCallPanel extends DebugPanel
          * @var $controller Controller;
          */
         $controller = $event->subject();
-        $this->_injectScriptsAndStyles($controller->response);
+        if ($controller instanceof \DebugKit\Controller\PanelsController) {
+            $this->_injectScriptsAndStyles($controller->response);
+        }
     }
 
     /**
