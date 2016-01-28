@@ -151,7 +151,7 @@
     text-align: left;
 }
 
-.reqres-container pre {
+.reqres-container pre, .stack-trace-container pre {
     position: relative;
     min-height: 16px;
     background-color: ghostwhite;
@@ -160,6 +160,11 @@
     font-family: monospace, monospace;
     font-size: 12px;
     line-height: 14px;
+    word-wrap: break-word;
+}
+.stack-trace-container pre {
+    border: none;
+    border-bottom: 1px solid silver;
 }
 
 .reqres-container pre code {
@@ -185,4 +190,13 @@
 .reqres-container a.formatted {
     background: #009688;
     color: white;
+}
+
+a.button-stacktrace {
+    font-size: 12px;
+    background: #009688;
+    color: white;
+    display: block;
+    padding: 2px 5px;
+    text-decoration: none;
 }

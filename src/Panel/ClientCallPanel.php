@@ -4,8 +4,10 @@ namespace DebugHttp\Panel;
 use Cake\Controller\Controller;
 use Cake\Core\Configure;
 use Cake\Core\StaticConfigTrait;
+use Cake\Error\Debugger;
 use Cake\Event\Event;
 use Cake\Routing\Router;
+use DebugKit\Controller\RequestsController;
 use DebugKit\DebugPanel;
 
 /**
@@ -59,7 +61,8 @@ class ClientCallPanel extends DebugPanel
     public static function addCall($request, $response, $time = null)
     {
         $calls   = static::config('calls');
-        $calls[] = ['request' => $request, 'response' => $response, 'time' => $time];
+        $trace   = Debugger::trace(['start' => 2]);
+        $calls[] = ['request' => $request, 'response' => $response, 'time' => $time, 'trace' => $trace];
         static::drop('calls');
         static::config('calls', $calls);
     }
@@ -77,7 +80,7 @@ class ClientCallPanel extends DebugPanel
          * @var $controller Controller;
          */
         $controller = $event->subject();
-        if ($controller instanceof \DebugKit\Controller\RequestsController) {
+        if ($controller instanceof RequestsController) {
             $this->_injectScriptsAndStyles($controller->response);
         }
     }
