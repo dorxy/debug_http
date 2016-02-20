@@ -26,7 +26,7 @@ class ClientCallPanel extends DebugPanel
      */
     public function summary()
     {
-        if ( ! static::config('calls')) {
+        if (! static::config('calls')) {
             return 0;
         }
 

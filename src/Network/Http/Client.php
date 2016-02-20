@@ -18,9 +18,9 @@ class Client extends \Cake\Network\Http\Client
     /**
      * Helper method for doing non-GET requests.
      *
-     * @param string $method HTTP method.
-     * @param string $url URL to request.
-     * @param mixed  $data The request body.
+     * @param string $method  HTTP method.
+     * @param string $url     URL to request.
+     * @param mixed  $data    The request body.
      * @param array  $options The options to use. Contains auth, proxy etc.
      *
      * @return \Cake\Network\Http\Response

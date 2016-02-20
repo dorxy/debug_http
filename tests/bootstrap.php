@@ -6,9 +6,9 @@
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ * @copyright Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link      http://cakephp.org CakePHP(tm) Project
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
@@ -47,7 +47,8 @@ date_default_timezone_set('UTC');
 mb_internal_encoding('UTF-8');
 
 Configure::write('debug', true);
-Configure::write('App', [
+Configure::write(
+    'App', [
     'namespace' => 'App',
     'encoding' => 'UTF-8',
     'base' => false,
@@ -63,28 +64,33 @@ Configure::write('App', [
         'plugins' => [APP . 'Plugin' . DS],
         'templates' => [APP . 'Template' . DS]
     ]
-]);
-Configure::write('Session', [
+    ]
+);
+Configure::write(
+    'Session', [
     'defaults' => 'php'
-]);
+    ]
+);
 
-Cache::config([
+Cache::config(
+    [
     '_cake_core_' => [
-        'engine' => 'File',
-        'prefix' => 'cake_core_',
-        'serialize' => true
+    'engine' => 'File',
+    'prefix' => 'cake_core_',
+    'serialize' => true
     ],
     '_cake_model_' => [
-        'engine' => 'File',
-        'prefix' => 'cake_model_',
-        'serialize' => true
+    'engine' => 'File',
+    'prefix' => 'cake_model_',
+    'serialize' => true
     ],
     'default' => [
-        'engine' => 'File',
-        'prefix' => 'default_',
-        'serialize' => true
+    'engine' => 'File',
+    'prefix' => 'default_',
+    'serialize' => true
     ]
-]);
+    ]
+);
 
 
 $config = [
@@ -96,18 +102,20 @@ ConnectionManager::config('test', $config);
 ConnectionManager::config('test_debug_http', $config);
 
 
-Log::config([
+Log::config(
+    [
     'debug' => [
-        'engine' => 'Cake\Log\Engine\FileLog',
-        'levels' => ['notice', 'info', 'debug'],
-        'file' => 'debug',
+    'engine' => 'Cake\Log\Engine\FileLog',
+    'levels' => ['notice', 'info', 'debug'],
+    'file' => 'debug',
     ],
     'error' => [
-        'engine' => 'Cake\Log\Engine\FileLog',
-        'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
-        'file' => 'error',
+    'engine' => 'Cake\Log\Engine\FileLog',
+    'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
+    'file' => 'error',
     ]
-]);
+    ]
+);
 
 Plugin::load('DebugHttp', ['path' => ROOT]);
 
