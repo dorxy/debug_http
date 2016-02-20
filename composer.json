@@ -1,28 +1,37 @@
 {
-    "name": "dorxy/debug_http",
-    "description": "CakePHP Debug Kit Http panel",
-    "type": "cakephp-plugin",
-    "keywords": ["cakephp", "debug", "http", "client"],
-    "homepage": "https://github.com/dorxy/debug_http",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Simone Alers",
-            "role": "Author"
-        }
-    ],
-    "support": {
-        "issues": "https://github.com/dorxy/debug_http/issues",
-        "source": "https://github.com/dorxy/debug_http"
-    },
-    "require": {
-        "cakephp/cakephp": "~3",
-        "cakephp/debug_kit": "~3.2"
-    },
-    "autoload": {
-        "psr-4": {
-            "DebugHttp\\": "src"
-        }
-    },
-    "minimum-stability": "beta"
+  "name": "dorxy/debug_http",
+  "description": "CakePHP Debug Kit Http panel",
+  "type": "cakephp-plugin",
+  "keywords": [
+    "cakephp",
+    "debug",
+    "http",
+    "client"
+  ],
+  "homepage": "https://github.com/dorxy/debug_http",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Simone Alers",
+      "role": "Author"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/dorxy/debug_http/issues",
+    "source": "https://github.com/dorxy/debug_http"
+  },
+  "require": {
+    "cakephp/cakephp": "~3",
+    "cakephp/debug_kit": "~3.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*",
+    "cakephp/cakephp-codesniffer": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "DebugHttp\\": "src"
+    }
+  },
+  "minimum-stability": "beta"
 }

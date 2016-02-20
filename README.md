@@ -1,5 +1,13 @@
 # DebugHttp
 
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
+[![Build Status](https://img.shields.io/travis/dorxy/debug_http/master.svg?style=flat-square)](https://travis-ci.org/dorxy/debug_http)
+[![Coverage Status](https://img.shields.io/codecov/c/github/dorxy/debug_http.svg?style=flat-square)](https://codecov.io/github/dorxy/debug_http)
+[![Code Consistency](https://squizlabs.github.io/PHP_CodeSniffer/analysis/dorxy/debug_http/grade.svg)](http://squizlabs.github.io/PHP_CodeSniffer/analysis/dorxy/debug_http/)
+[![Total Downloads](https://img.shields.io/packagist/dt/dorxy/debug_http.svg?style=flat-square)](https://packagist.org/packages/dorxy/debug_http)
+[![Latest Stable Version](https://img.shields.io/packagist/v/dorxy/debug_http.svg?style=flat-square&label=stable)](https://packagist.org/packages/dorxy/debug_http)
+[![Latest Unstable Version](https://img.shields.io/packagist/vpre/dorxy/debug_http.svg?style=flat-square&label=unstable)](https://packagist.org/packages/dorxy/debug_http)
+
 DebugHttp gives the [CakePHP DebugKit](https://github.com/cakephp/debug_kit) plugin integration for HTTP requests using [CakePHP's client](http://book.cakephp.org/3.0/en/core-libraries/httpclient.html).
 
 ## Requirements
