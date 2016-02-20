@@ -25,5 +25,4 @@ class DebugHttpTest extends TestCase
     {
         $this->assertEquals('Test', 'Test');
     }
-
 }

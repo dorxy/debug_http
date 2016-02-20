@@ -105,23 +105,23 @@ class CallHelper extends Helper
         }
         $contentFormatted = '';
         switch ($contentType) {
-        case 'json':
-            $contentFormatted = json_encode(json_decode($content), JSON_PRETTY_PRINT);
-            break;
-        case 'xml':
-            $doc                     = new DomDocument('1.0');
-            $doc->preserveWhiteSpace = false;
-            $doc->formatOutput       = true;
-            @$doc->loadXML($content); //our code is not responsible for badly formatted content
-            $contentFormatted = $doc->saveXML();
-            break;
-        case 'html':
-            $doc                     = new DomDocument('1.0');
-            $doc->preserveWhiteSpace = false;
-            $doc->formatOutput       = true;
-            @$doc->loadHTML($content); //our code is not responsible for badly formatted content
-            $contentFormatted = $doc->saveHTML();
-            break;
+            case 'json':
+                $contentFormatted = json_encode(json_decode($content), JSON_PRETTY_PRINT);
+                break;
+            case 'xml':
+                $doc                     = new DomDocument('1.0');
+                $doc->preserveWhiteSpace = false;
+                $doc->formatOutput       = true;
+                @$doc->loadXML($content); //our code is not responsible for badly formatted content
+                $contentFormatted = $doc->saveXML();
+                break;
+            case 'html':
+                $doc                     = new DomDocument('1.0');
+                $doc->preserveWhiteSpace = false;
+                $doc->formatOutput       = true;
+                @$doc->loadHTML($content); //our code is not responsible for badly formatted content
+                $contentFormatted = $doc->saveHTML();
+                break;
         }
         $copyButton = '<a href="javascript:;" class="select-response">Select</a>';
         $rawButton  = '<a href="javascript:;" class="formatted" onclick="$(this).text($(this).text() == \'Raw\' ? \'Formatted\' : \'Raw\').next(\'pre\').find(\'> code\').toggle();">Raw</a>';
@@ -154,5 +154,4 @@ class CallHelper extends Helper
 
         return $this->Html->tag('pre', $trace);
     }
-
 }
