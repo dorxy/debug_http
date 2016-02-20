@@ -19,7 +19,7 @@ class CallHelper extends Helper
     /**
      * Output request method
      *
-     * @param string $method
+     * @param string $method Method of a request, e.g. GET, POST, PUT
      *
      * @return string Span for method
      */
@@ -31,7 +31,7 @@ class CallHelper extends Helper
     /**
      * Output response code
      *
-     * @param int $code
+     * @param int $code HTTP status code of a response
      *
      * @return string Span for code
      */
@@ -45,7 +45,7 @@ class CallHelper extends Helper
     /**
      * Output call time
      *
-     * @param float $time
+     * @param float $time Duration of a request
      *
      * @return string Span with time in milliseconds
      */
@@ -57,8 +57,8 @@ class CallHelper extends Helper
     /**
      * Formatted headers of a request/response
      *
-     * @param array  $headers Key value pairs of headers
-     * @param string $name
+     * @param array $headers Key value pairs of headers
+     * @param string $name Title of the headers table
      *
      * @return string Table with headers
      */
@@ -81,8 +81,8 @@ class CallHelper extends Helper
     /**
      * Get formatted output body
      *
-     * @param $content
-     * @param $type
+     * @param string $content Content of the body
+     * @param string $type Type of the body, e.g. xml, json or html
      *
      * @return string
      */
@@ -109,26 +109,26 @@ class CallHelper extends Helper
                 $contentFormatted = json_encode(json_decode($content), JSON_PRETTY_PRINT);
                 break;
             case 'xml':
-                $doc                     = new DomDocument('1.0');
+                $doc = new DomDocument('1.0');
                 $doc->preserveWhiteSpace = false;
-                $doc->formatOutput       = true;
+                $doc->formatOutput = true;
                 @$doc->loadXML($content); //our code is not responsible for badly formatted content
                 $contentFormatted = $doc->saveXML();
                 break;
             case 'html':
-                $doc                     = new DomDocument('1.0');
+                $doc = new DomDocument('1.0');
                 $doc->preserveWhiteSpace = false;
-                $doc->formatOutput       = true;
+                $doc->formatOutput = true;
                 @$doc->loadHTML($content); //our code is not responsible for badly formatted content
                 $contentFormatted = $doc->saveHTML();
                 break;
         }
         $copyButton = '<a href="javascript:;" class="select-response">Select</a>';
-        $rawButton  = '<a href="javascript:;" class="formatted" onclick="$(this).text($(this).text() == \'Raw\' ? \'Formatted\' : \'Raw\').next(\'pre\').find(\'> code\').toggle();">Raw</a>';
+        $rawButton = '<a href="javascript:;" class="formatted" onclick="$(this).text($(this).text() == \'Raw\' ? \'Formatted\' : \'Raw\').next(\'pre\').find(\'> code\').toggle();">Raw</a>';
 
 
         $html = $copyButton;
-        if (! empty($contentFormatted)) {
+        if (!empty($contentFormatted)) {
             $html .= $rawButton . '<pre>';
             $html .= $this->Html->tag('code', htmlentities($contentFormatted), ['class' => 'language-' . $contentType]);
             $html .= $this->Html->tag('code', htmlentities($content), ['class' => 'raw', 'style' => 'display:none;']);
@@ -144,7 +144,7 @@ class CallHelper extends Helper
     /**
      * Get formatted stack trace
      *
-     * @param $trace
+     * @param string $trace Trace in string format
      *
      * @return string
      */

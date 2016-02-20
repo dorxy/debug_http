@@ -6,6 +6,8 @@ use Cake\Core\Configure;
 use Cake\Core\StaticConfigTrait;
 use Cake\Error\Debugger;
 use Cake\Event\Event;
+use Cake\Network\Http\Request;
+use Cake\Network\Http\Response;
 use Cake\Routing\Router;
 use DebugKit\Controller\RequestsController;
 use DebugKit\DebugPanel;
@@ -26,7 +28,7 @@ class ClientCallPanel extends DebugPanel
      */
     public function summary()
     {
-        if (! static::config('calls')) {
+        if (!static::config('calls')) {
             return 0;
         }
 
@@ -54,14 +56,14 @@ class ClientCallPanel extends DebugPanel
     /**
      * Add a HTTP call to the data
      *
-     * @param $request
-     * @param $response
-     * @param $time
+     * @param Request $request Call request
+     * @param Response $response Call response
+     * @param float $time duration of the call
      */
     public static function addCall($request, $response, $time = null)
     {
-        $calls   = static::config('calls');
-        $trace   = Debugger::trace(['start' => 2]);
+        $calls = static::config('calls');
+        $trace = Debugger::trace(['start' => 2]);
         $calls[] = ['request' => $request, 'response' => $response, 'time' => $time, 'trace' => $trace];
         static::drop('calls');
         static::config('calls', $calls);
@@ -76,9 +78,9 @@ class ClientCallPanel extends DebugPanel
      */
     public function shutdown(Event $event)
     {
-        /**
-         * @var $controller Controller;
-         */
+    /**
+     * @var $controller Controller;
+     */
         $controller = $event->subject();
         if ($controller instanceof RequestsController) {
             $this->_injectScriptsAndStyles($controller->response);
