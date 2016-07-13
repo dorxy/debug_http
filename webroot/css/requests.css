@@ -162,6 +162,7 @@
     line-height: 14px;
     word-wrap: break-word;
 }
+
 .stack-trace-container pre {
     border: none;
     border-bottom: 1px solid silver;
@@ -173,6 +174,11 @@
     margin: 0;
     word-break: break-all;
     word-wrap: break-word;
+}
+
+.reqres-container pre code.raw {
+    display: inline-block;
+    white-space: normal;
 }
 
 .reqres-container a.select-response, .reqres-container a.formatted {
