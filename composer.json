@@ -21,7 +21,7 @@
     "source": "https://github.com/dorxy/debug_http"
   },
   "require": {
-    "cakephp/cakephp": "~3 < 3.3.0",
+    "cakephp/cakephp": "~3.3",
     "cakephp/debug_kit": "~3.2"
   },
   "require-dev": {

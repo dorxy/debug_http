@@ -12,17 +12,17 @@ $this->loadHelper('DebugHttp.Call');
         <?php foreach ($calls as $call): ?>
             <?php
             /**
-             * @var $request \Cake\Network\Http\Request
-             * @var $response \Cake\Network\Http\Response
+             * @var $request \Cake\Http\Client\Request
+             * @var $response \Cake\Http\Client\Response
              */
             $request  = $call['request'];
             $response = $call['response'];
             ?>
             <li>
                 <div onclick="$(this).next('div').toggle();" style="cursor:pointer;">
-                    <?= $this->Call->method($request->method()); ?>
-                    <?= $this->Call->code($response->statusCode()); ?>
-                    <?= $request->url(); ?>
+                    <?= $this->Call->method($request['method']); ?>
+                    <?= $this->Call->code($response['status_code']); ?>
+                    <?= $request['uri']; ?>
                     <?= $this->Call->time($call['time']); ?>
                 </div>
                 <div style="display: none;width:100%;">
@@ -34,12 +34,12 @@ $this->loadHelper('DebugHttp.Call');
                     </div>
 
                     <div class="reqres-container">
-                        <?= $this->Call->headers($request->headers(), 'request'); ?>
-                        <?= $this->Call->body($request->body(), $request->header('Content-type')); ?>
+                        <?= $this->Call->headers($request['headers'], 'request'); ?>
+                        <?= $this->Call->body($request['body'], $request['content-type']); ?>
                     </div>
                     <div class="reqres-container">
-                        <?= $this->Call->headers($response->headers(), 'response'); ?>
-                        <?= $this->Call->body($response->body(), $response->header('Content-type')); ?>
+                        <?= $this->Call->headers($response['headers'], 'response'); ?>
+                        <?= $this->Call->body($response['body'], $response['content-type']); ?>
                     </div>
                 </div>
             </li>

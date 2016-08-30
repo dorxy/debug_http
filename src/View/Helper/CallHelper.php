@@ -57,7 +57,7 @@ class CallHelper extends Helper
     /**
      * Formatted headers of a request/response
      *
-     * @param array $headers Key value pairs of headers
+     * @param array  $headers Key value pairs of headers
      * @param string $name Title of the headers table
      *
      * @return string Table with headers
@@ -81,12 +81,12 @@ class CallHelper extends Helper
     /**
      * Get formatted output body
      *
-     * @param string $content Content of the body
-     * @param string $type Type of the body, e.g. xml, json or html
+     * @param string          $content Content of the body
+     * @param string[]|string $types Types of the body, e.g. xml, json or html
      *
      * @return string
      */
-    public function body($content, $type)
+    public function body($content, $types)
     {
         if (empty($content)) {
             return '<pre data-format-text><span style="color:darkgrey;">Empty body</span></pre>';
@@ -95,12 +95,17 @@ class CallHelper extends Helper
         if (is_array($content)) {
             $content = http_build_query($content);
         }
+        if ( ! is_array($types)) {
+            $types = [$types];
+        }
 
         $contentType = 'text';
         foreach (['json', 'xml', 'html'] as $possibleType) {
-            if (strpos(strtolower($type), $possibleType) !== false) {
-                $contentType = $possibleType;
-                break;
+            foreach ($types as $type) {
+                if (strpos(strtolower($type), $possibleType) !== false) {
+                    $contentType = $possibleType;
+                    break;
+                }
             }
         }
         $contentFormatted = '';
@@ -109,26 +114,26 @@ class CallHelper extends Helper
                 $contentFormatted = json_encode(json_decode($content), JSON_PRETTY_PRINT);
                 break;
             case 'xml':
-                $doc = new DomDocument('1.0');
+                $doc                     = new DomDocument('1.0');
                 $doc->preserveWhiteSpace = false;
-                $doc->formatOutput = true;
+                $doc->formatOutput       = true;
                 @$doc->loadXML($content); //our code is not responsible for badly formatted content
                 $contentFormatted = $doc->saveXML();
                 break;
             case 'html':
-                $doc = new DomDocument('1.0');
+                $doc                     = new DomDocument('1.0');
                 $doc->preserveWhiteSpace = false;
-                $doc->formatOutput = true;
+                $doc->formatOutput       = true;
                 @$doc->loadHTML($content); //our code is not responsible for badly formatted content
                 $contentFormatted = $doc->saveHTML();
                 break;
         }
         $copyButton = '<a href="javascript:;" class="select-response">Select</a>';
-        $rawButton = '<a href="javascript:;" class="formatted" onclick="$(this).text($(this).text() == \'Raw\' ? \'Formatted\' : \'Raw\').next(\'pre\').find(\'> code\').toggle();">Raw</a>';
+        $rawButton  = '<a href="javascript:;" class="formatted" onclick="$(this).text($(this).text() == \'Raw\' ? \'Formatted\' : \'Raw\').next(\'pre\').find(\'> code\').toggle();">Raw</a>';
 
 
         $html = $copyButton;
-        if (!empty($contentFormatted)) {
+        if ( ! empty($contentFormatted)) {
             $html .= $rawButton . '<pre>';
             $html .= $this->Html->tag('code', htmlentities($contentFormatted), ['class' => 'language-' . $contentType]);
             $html .= $this->Html->tag('code', htmlentities($content), ['class' => 'raw', 'style' => 'display:none;']);

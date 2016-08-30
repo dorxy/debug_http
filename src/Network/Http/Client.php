@@ -12,7 +12,7 @@ use DebugKit\DebugTimer;
  *
  * @package DebugHttp\Network\Http
  */
-class Client extends \Cake\Network\Http\Client
+class Client extends \Cake\Http\Client
 {
 
     /**
