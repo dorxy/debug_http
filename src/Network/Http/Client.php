@@ -29,7 +29,8 @@ class Client extends \Cake\Http\Client
     {
         $request = $this->_createRequest($method, $url, $data, $options);
 
-        $timerKey = 'debug_http.call.' . $url;
+        $time = microtime();
+        $timerKey = 'debug_http.call.' . $url . '.' . $time;
         if (Configure::read('debug')) {
             DebugTimer::start($timerKey, $method . ' ' . $url);
         }
