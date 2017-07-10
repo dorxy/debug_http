@@ -1,15 +1,16 @@
 <?php
+
 namespace DebugHttp\Panel;
 
 use Cake\Controller\Controller;
 use Cake\Core\StaticConfigTrait;
 use Cake\Error\Debugger;
 use Cake\Event\Event;
-use Cake\Http\Client\Request;
-use Cake\Http\Client\Response;
 use Cake\Routing\Router;
 use DebugKit\Controller\RequestsController;
 use DebugKit\DebugPanel;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Services panel for use with DebugKit
@@ -27,7 +28,7 @@ class ClientCallPanel extends DebugPanel
      */
     public function summary()
     {
-        if ( ! static::config('calls')) {
+        if (!static::config('calls')) {
             return 0;
         }
 
@@ -55,30 +56,30 @@ class ClientCallPanel extends DebugPanel
     /**
      * Add a HTTP call to the data
      *
-     * @param Request  $request Call request
-     * @param Response $response Call response
-     * @param float    $time duration of the call
+     * @param RequestInterface  $request  Call request
+     * @param ResponseInterface $response Call response
+     * @param float             $time     duration of the call
      */
-    public static function addCall($request, $response, $time = null)
+    public static function addCall(RequestInterface $request, ResponseInterface $response, $time = null)
     {
         $calls   = static::config('calls');
         $trace   = Debugger::trace(['start' => 2]);
         $calls[] = [
             'request'  => [
                 'uri'          => (string)$request->getUri(),
-                'body'         => $request->body(),
+                'body'         => (string)$request->getBody(),
                 'method'       => $request->getMethod(),
                 'headers'      => $request->getHeaders(),
                 'content-type' => $request->getHeader('Content-Type'),
             ],
             'response' => [
-                'body'         => $response->body(),
+                'body'         => (string)$response->getBody(),
                 'status_code'  => $response->getStatusCode(),
                 'headers'      => $response->getHeaders(),
                 'content-type' => $response->getHeader('Content-Type'),
             ],
             'time'     => $time,
-            'trace'    => $trace
+            'trace'    => $trace,
         ];
         static::drop('calls');
         static::config('calls', $calls);
@@ -124,7 +125,7 @@ class ClientCallPanel extends DebugPanel
         if ($pos !== false) {
             $script = '<script src="' . Router::url('/debug_http/js/highlight.min.js') . '"></script>';
             $script .= '<script src="' . Router::url('/debug_http/js/clipboard.min.js') . '"></script>';
-            $body = substr($body, 0, $pos) . $script . substr($body, $pos);
+            $body   = substr($body, 0, $pos) . $script . substr($body, $pos);
         }
 
         //add styles
@@ -132,7 +133,7 @@ class ClientCallPanel extends DebugPanel
         if ($pos !== false) {
             $style = '<link rel="stylesheet" type="text/css" href="' . Router::url('/debug_http/css/requests.css') . '">';
             $style .= '<link rel="stylesheet" type="text/css" href="' . Router::url('/debug_http/css/highlight.min.css') . '">';
-            $body = substr($body, 0, $pos) . $style . substr($body, $pos);
+            $body  = substr($body, 0, $pos) . $style . substr($body, $pos);
         }
 
         $response->body($body);
