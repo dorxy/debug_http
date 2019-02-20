@@ -74,7 +74,7 @@ Configure::write(
     ]
 );
 
-Cache::config(
+Cache::setConfig(
     [
     '_cake_core_' => [
     'engine' => 'File',
@@ -100,11 +100,11 @@ $config = [
 ];
 
 // Use the test connection for 'debug_kit' as well.
-ConnectionManager::config('test', $config);
-ConnectionManager::config('test_debug_http', $config);
+ConnectionManager::setConfig('test', $config);
+ConnectionManager::setConfig('test_debug_http', $config);
 
 
-Log::config(
+Log::setConfig(
     [
     'debug' => [
     'engine' => 'Cake\Log\Engine\FileLog',

@@ -14,7 +14,7 @@ DebugHttp gives the [CakePHP DebugKit](https://github.com/cakephp/debug_kit) plu
 
 The `master` branch has the following requirements:
 
-* CakePHP 3.0.0 or larger
+* CakePHP 3.4.0 or larger
 * DebugKit 3.2 or larger
 
 ## Installation

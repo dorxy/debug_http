@@ -28,11 +28,11 @@ class ClientCallPanel extends DebugPanel
      */
     public function summary()
     {
-        if (!static::config('calls')) {
+        if (!static::getConfig('calls')) {
             return 0;
         }
 
-        return count(static::config('calls'));
+        return count(static::getConfig('calls'));
     }
 
     /**
@@ -50,7 +50,7 @@ class ClientCallPanel extends DebugPanel
      */
     public function data()
     {
-        return ['calls' => static::config('calls')];
+        return ['calls' => static::getConfig('calls')];
     }
 
     /**
@@ -62,7 +62,7 @@ class ClientCallPanel extends DebugPanel
      */
     public static function addCall(RequestInterface $request, ResponseInterface $response, $time = null)
     {
-        $calls   = static::config('calls');
+        $calls   = static::getConfig('calls');
         $trace   = Debugger::trace(['start' => 2]);
         $calls[] = [
             'request'  => [
@@ -82,7 +82,7 @@ class ClientCallPanel extends DebugPanel
             'trace'    => $trace,
         ];
         static::drop('calls');
-        static::config('calls', $calls);
+        static::getConfig('calls', $calls);
     }
 
     /**
