@@ -82,7 +82,7 @@ class ClientCallPanel extends DebugPanel
             'trace'    => $trace,
         ];
         static::drop('calls');
-        static::getConfig('calls', $calls);
+        static::setConfig('calls', $calls);
     }
 
     /**
