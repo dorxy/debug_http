@@ -50,7 +50,7 @@ class ClientCallPanel extends DebugPanel
      */
     public function data()
     {
-        return ['calls' => static::getConfig('calls')];
+        return ['calls' => static::getConfig('calls') ?: []];
     }
 
     /**
@@ -97,9 +97,9 @@ class ClientCallPanel extends DebugPanel
         /**
          * @var $controller Controller;
          */
-        $controller = $event->subject();
+        $controller = $event->getSubject();
         if ($controller instanceof RequestsController) {
-            $this->_injectScriptsAndStyles($controller->response);
+            $this->_injectScriptsAndStyles($controller->getResponse());
         }
     }
 
@@ -115,10 +115,10 @@ class ClientCallPanel extends DebugPanel
      */
     protected function _injectScriptsAndStyles($response)
     {
-        if (strpos($response->type(), 'html') === false) {
+        if (strpos($response->getType(), 'html') === false) {
             return;
         }
-        $body = $response->body();
+        $body = $response->getBody();
 
         //add scripts
         $pos = strrpos($body, '</body>');
@@ -136,6 +136,6 @@ class ClientCallPanel extends DebugPanel
             $body  = substr($body, 0, $pos) . $style . substr($body, $pos);
         }
 
-        $response->body($body);
+        $response = $response->withStringBody($body);
     }
 }
