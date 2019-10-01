@@ -99,24 +99,24 @@ class ClientCallPanel extends DebugPanel
          */
         $controller = $event->getSubject();
         if ($controller instanceof RequestsController) {
-            $this->_injectScriptsAndStyles($controller->getResponse());
+            $controller->setResponse($this->_injectScriptsAndStyles($controller->getResponse()));
         }
     }
 
     /**
-     * Injects the JS to build the toolbar.
+     * Injects the JS to build the toolbar and return the new response.
      *
      * The toolbar will only be injected if the response's content type
      * contains HTML and there is a </body> tag.
      *
      * @param \Cake\Network\Response $response The response to augment.
      *
-     * @return void
+     * @return \Cake\Network\Response
      */
     protected function _injectScriptsAndStyles($response)
     {
         if (strpos($response->getType(), 'html') === false) {
-            return;
+            return $response;
         }
         $body = $response->getBody();
 
@@ -136,6 +136,6 @@ class ClientCallPanel extends DebugPanel
             $body  = substr($body, 0, $pos) . $style . substr($body, $pos);
         }
 
-        $response = $response->withStringBody($body);
+        return $response->withStringBody($body);
     }
 }
