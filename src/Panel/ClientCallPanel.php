@@ -5,7 +5,8 @@ namespace DebugHttp\Panel;
 use Cake\Controller\Controller;
 use Cake\Core\StaticConfigTrait;
 use Cake\Error\Debugger;
-use Cake\Event\Event;
+use Cake\Event\EventInterface;
+use Cake\Http\Response;
 use Cake\Routing\Router;
 use DebugKit\Controller\RequestsController;
 use DebugKit\DebugPanel;
@@ -88,11 +89,11 @@ class ClientCallPanel extends DebugPanel
     /**
      * Shutdown callback
      *
-     * @param \Cake\Event\Event $event The event.
+     * @param \Cake\Event\EventInterface $event The event.
      *
      * @return void
      */
-    public function shutdown(Event $event)
+    public function shutdown(EventInterface $event)
     {
         /**
          * @var $controller Controller;
@@ -109,11 +110,11 @@ class ClientCallPanel extends DebugPanel
      * The toolbar will only be injected if the response's content type
      * contains HTML and there is a </body> tag.
      *
-     * @param \Cake\Network\Response $response The response to augment.
+     * @param \Cake\Http\Response $response The response to augment.
      *
-     * @return \Cake\Network\Response
+     * @return \Cake\Http\Response
      */
-    protected function _injectScriptsAndStyles($response)
+    protected function _injectScriptsAndStyles(Response $response): Response
     {
         if (strpos($response->getType(), 'html') === false) {
             return $response;

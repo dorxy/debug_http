@@ -1,7 +1,9 @@
 <?php
+
 namespace DebugHttp\Network\Http;
 
 use Cake\Core\Configure;
+use Cake\Http\Client\Response;
 use DebugHttp\Panel\ClientCallPanel;
 use DebugKit\DebugTimer;
 
@@ -14,7 +16,6 @@ use DebugKit\DebugTimer;
  */
 class Client extends \Cake\Http\Client
 {
-
     /**
      * Helper method for doing non-GET requests.
      *
@@ -23,13 +24,13 @@ class Client extends \Cake\Http\Client
      * @param mixed  $data    The request body.
      * @param array  $options The options to use. Contains auth, proxy etc.
      *
-     * @return \Cake\Network\Http\Response
+     * @return Response
      */
-    protected function _doRequest($method, $url, $data, $options)
+    protected function _doRequest(string $method, string $url, $data, $options): Response
     {
         $request = $this->_createRequest($method, $url, $data, $options);
 
-        $time = microtime();
+        $time     = microtime();
         $timerKey = 'debug_http.call.' . $url . '.' . $time;
         if (Configure::read('debug')) {
             DebugTimer::start($timerKey, $method . ' ' . $url);
