@@ -8,31 +8,33 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/dorxy/debug_http.svg?style=flat-square&label=stable)](https://packagist.org/packages/dorxy/debug_http)
 [![Latest Unstable Version](https://img.shields.io/packagist/vpre/dorxy/debug_http.svg?style=flat-square&label=unstable)](https://packagist.org/packages/dorxy/debug_http)
 
-DebugHttp gives the [CakePHP DebugKit](https://github.com/cakephp/debug_kit) plugin integration for HTTP requests using [CakePHP's client](http://book.cakephp.org/3.0/en/core-libraries/httpclient.html).
+DebugHttp gives the [CakePHP DebugKit](https://github.com/cakephp/debug_kit) plugin integration for HTTP requests using [CakePHP's client](https://book.cakephp.org/4/en/core-libraries/httpclient.html).
 
 ## Requirements
 
 The `master` branch has the following requirements:
 
-* CakePHP 3.4.0 or larger
-* DebugKit 3.2 or larger
+* CakePHP 4.0.0 or larger
+* DebugKit 4.0.0 or larger
 
 ## Installation
 
 * Install the plugin with [Composer](https://getcomposer.org/) from your CakePHP Project's ROOT directory (where the **composer.json** file is located)
 ```sh
-php composer.phar require dorxy/debug_http "~1.0"
+php composer.phar require dorxy/debug_http "~2.0"
 ```
 _note this is not a dev requirement_
 
-* [Load the plugin](http://book.cakephp.org/3.0/en/plugins.html#loading-a-plugin)
+* [Load the plugin](https://book.cakephp.org/4/en/plugins.html#loading-a-plugin)
 ```php
-Plugin::load('DebugHttp');
-Plugin::load('DebugKit', ['bootstrap' => true, 'routes' => true]);
+// In src/Application.php bootstrap() method add
+$this->addPlugin('DebugHttp');
+$this->addPlugin('DebugKit', ['bootstrap' => true]);
 ```
 
 * Add the panel to DebugKit
 ```php
+// In src/Application.php bootstrap() method, before loading the plugins, add
 Configure::write('DebugKit.panels', ['DebugHttp.ClientCall']);
 ```
 
@@ -42,7 +44,7 @@ Configure::write('DebugKit.panels', ['DebugHttp.ClientCall']);
 
 Whenever you wish to have a client request appear in the DebugHttp panel you must use the provided client, e.g.:
 ```php
-$http = new \DebugHttp\Network\Http\Client();
+$http = new \DebugHttp\Http\Client();
 $http->get('http://www.google.com');
 ```
 
