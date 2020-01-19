@@ -1,6 +1,6 @@
 <?php
 
-namespace DebugHttp\Network\Http;
+namespace DebugHttp\Http;
 
 use Cake\Core\Configure;
 use Cake\Http\Client\Response;
