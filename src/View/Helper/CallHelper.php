@@ -100,16 +100,26 @@ class CallHelper extends Helper
         }
 
         $contentType = 'text';
-        foreach (['json', 'xml', 'html'] as $possibleType) {
+        foreach (['ndjson', 'json', 'xml', 'html'] as $possibleType) {
             foreach ($types as $type) {
                 if (strpos(strtolower($type), $possibleType) !== false) {
                     $contentType = $possibleType;
-                    break;
+                    break 2;
                 }
             }
         }
         $contentFormatted = '';
         switch ($contentType) {
+            case 'ndjson':
+                // Split on newline, treat as JSON
+                $contentFormatted = array_map(
+                    function ($c) {
+                        return json_encode(json_decode($c), JSON_PRETTY_PRINT);
+                    },
+                    explode(PHP_EOL, trim($content))
+                );
+                $contentType = 'json';
+                break;
             case 'json':
                 $contentFormatted = json_encode(json_decode($content), JSON_PRETTY_PRINT);
                 break;
@@ -135,7 +145,9 @@ class CallHelper extends Helper
         $html = $copyButton;
         if ( ! empty($contentFormatted)) {
             $html .= $rawButton . '<pre>';
-            $html .= $this->Html->tag('code', htmlentities($contentFormatted), ['class' => 'language-' . $contentType]);
+            foreach ((array)$contentFormatted as $item) {
+                $html .= $this->Html->tag('code', htmlentities($item), ['class' => 'language-' . $contentType]);
+            }
             $html .= $this->Html->tag('code', htmlentities($content), ['class' => 'raw', 'style' => 'display:none;']);
         } else {
             $html .= '<pre>';
