@@ -29,17 +29,25 @@ class Client extends \Cake\Http\Client
     {
         $request = $this->_createRequest($method, $url, $data, $options);
 
-        $time = microtime();
+        $time     = microtime();
         $timerKey = 'debug_http.call.' . $url . '.' . $time;
         if (Configure::read('debug')) {
             DebugTimer::start($timerKey, $method . ' ' . $url);
         }
 
-        $response = $this->send($request, $options);
+        try {
+            $response = $this->send($request, $options);
+        } catch (HttpException $exception) {
+            $response  = new Response(['body' => $exception->getMessage(), 'type' => 'text/plain']);
+        }
 
         if (Configure::read('debug')) {
             DebugTimer::stop($timerKey);
             ClientCallPanel::addCall($request, $response, DebugTimer::elapsedTime($timerKey));
+        }
+
+        if (isset($exception)) {
+            throw $exception;
         }
 
         return $response;
