@@ -1,7 +1,6 @@
 <?php
 namespace DebugHttp\Network\Http;
 
-use Cake\Core\Configure;
 use DebugHttp\Panel\ClientCallPanel;
 use DebugKit\DebugTimer;
 
@@ -31,13 +30,13 @@ class Client extends \Cake\Http\Client
 
         $time = microtime();
         $timerKey = 'debug_http.call.' . $url . '.' . $time;
-        if (Configure::read('debug')) {
+        if (class_exists(ClientCallPanel::class) && class_exists(DebugTimer::class)) {
             DebugTimer::start($timerKey, $method . ' ' . $url);
         }
 
         $response = $this->send($request, $options);
 
-        if (Configure::read('debug')) {
+        if (class_exists(ClientCallPanel::class) && class_exists(DebugTimer::class)) {
             DebugTimer::stop($timerKey);
             ClientCallPanel::addCall($request, $response, DebugTimer::elapsedTime($timerKey));
         }
