@@ -32,7 +32,12 @@ class ClientCallPanel extends DebugPanel
             return 0;
         }
 
-        return count(static::getConfig('calls'));
+        $calls = static::getConfig('calls');
+        $time  = array_sum(array_map(function ($call) {
+            return $call['time'];
+        }, $calls));
+
+        return count($calls) . ' / ' . round($time * 1000) . ' ms';
     }
 
     /**
